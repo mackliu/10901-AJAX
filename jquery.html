@@ -27,7 +27,7 @@
     ********************************************************/
      
     //利用$.ajax()方法傳送請求並取得回應
-    $.ajax(
+/*     $.ajax(
       {
         url:'https://kktix.com/events.json',
         type:'GET',
@@ -42,7 +42,16 @@
           console.log("status:"+status)
         }
       }
-    )   
+    )    */
+
+      $.get('https://kktix.com/events.json',function(response){
+
+         // console.log(response)
+          renderList(response)
+
+      })
+
+      
 
     function renderList(response){
         document.querySelector('.title').innerHTML=response.title;
