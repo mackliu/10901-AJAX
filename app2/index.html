@@ -15,6 +15,21 @@
 <body>
   <h1 class="header">學生資料管理系統</h1>
   <button onclick="openInsert()">新增</button>
+
+
+<div class="query">
+班級:<select name="classes" id="classes" onchange="getStudents(this.value)">
+
+  </select>
+  <div class="students"></div>
+
+
+</div>
+
+
+
+
+  <!---新增資料用的表單-->
   <div id='insertBlock' style="display:none">
     <h3>新增學生資料</h3>
     <form action="api/insert.php" method='post' id="create">
@@ -46,7 +61,7 @@
 * 4.是否會有回傳值？回傳值的功用及處理？
 * 5.是否需要更新畫面內容？更新畫面的方法？
 ************************************/
-
+getClasses()
 
 //新增資料的函式
 function create(){
@@ -78,6 +93,21 @@ function openInsert(){
   document.querySelector("#insertBlock").style.display='block';
 }
 //查詢資料的函式
+function getClasses(){
+  $.get("api/select_class.php",function(opt){
+    //console.log(opt)
+    document.querySelector("#classes").innerHTML=opt
+  })
+}
+
+function getStudents(_class){
+  console.log(_class)
+  $.get("api/get_students.php",{'class':_class},function(students){
+    console.log(students)
+    document.querySelector(".students").innerHTML=students
+  })
+}
+
 function query(){
 
 }
