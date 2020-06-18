@@ -18,16 +18,19 @@
 
 
 <div class="query">
+  <!---用來顯示班級清單的選單--->
 班級:<select name="classes" id="classes" onchange="getStudents(this.value)">
 
   </select> <input type="text" name='q' id="query"><input type="button" value="查詢" onclick="query()">
+
+  <!--用來存放查詢結果的區塊-->
   <div class="query-result"></div>
+  
+  <!--用來存放學生資料的區塊-->
   <div class="students"></div>
 
 
 </div>
-
-
 
 
   <!---新增資料用的表單-->
@@ -66,6 +69,7 @@ getClasses()
 
 //新增資料的函式
 function create(){
+  //取得所有要新增到資料庫的欄位
   let name=document.querySelector("#name").value
   let uni_id=document.querySelector("#uni_id").value
   let class_num=document.querySelector("#class_num").value
@@ -77,10 +81,12 @@ function create(){
   let dept=document.querySelector("#dept").value
   let grad_at=document.querySelector("#grad_at").value
 
-  console.log(name,uni_id, class_num, birthday, nat_id, addr, parent, tel, dept, grad_at)
+  //console.log(name,uni_id, class_num, birthday, nat_id, addr, parent, tel, dept, grad_at)
   
+  //以ajax的方式將表單資料傳送到後端的api去
   $.post("api/insert.php",{name,uni_id, class_num, birthday, nat_id, addr, parent, tel, dept, grad_at},function(res){
-    console.log(res)
+    //console.log(res)
+    //由api端提供回應來判斷新增是否成功，新增成功則alert成功訊息
     if(res=='1'){
       alert("新增成功");
       document.querySelector("#insertBlock").style.display='none';
@@ -89,11 +95,14 @@ function create(){
 
 }
 
-
+//顯示新增資料的表單
 function openInsert(){
   document.querySelector("#insertBlock").style.display='block';
 }
+
 //查詢資料的函式
+
+//用ajax向後端api程式要求班級清單選項並放在select標籤中
 function getClasses(){
   $.get("api/select_class.php",function(opt){
     //console.log(opt)
@@ -101,14 +110,16 @@ function getClasses(){
   })
 }
 
+//用ajax向後端api程式要求指定班級的學生並顯示在指定的區塊中
 function getStudents(_class){
-  console.log(_class)
+  //console.log(_class)
   $.get("api/get_students.php",{'class':_class},function(students){
-    console.log(students)
+    //console.log(students)
     document.querySelector(".students").innerHTML=students
   })
 }
 
+//用ajax向後端的api程式要求查詢學生資料，只要輸入關鍵字就可以查得類似名稱的學生資料
 function query(){
   let str=document.querySelector("#query").value;
   $.get("api/query.php",{str},function(res){
