@@ -122,8 +122,16 @@ function update(){
 }
 
 //刪除資料的函式
-function del(){
-
+function del(id){
+  $.post("api/del.php",{id},function(res){
+    if(res=='1'){
+      alert("已成功刪除id"+id+"資料")
+      let nowClass=document.querySelector("#classes").value
+      getStudents(nowClass)
+    }else{
+      alert("刪除失敗，請洽管理員")
+    }
+  })
 }
 
 </script>
