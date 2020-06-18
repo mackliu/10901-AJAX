@@ -26,6 +26,9 @@
   <!--用來存放編輯表單的區塊-->
   <div class="edit-form"></div>
 
+  <!--用來存放新增表單的區塊-->
+  <div class="add-form"></div>
+
   <!--用來存放查詢結果的區塊-->
   <div class="query-result"></div>
   
@@ -37,26 +40,7 @@
 
 
   <!---新增資料用的表單-->
-  <div id='insertBlock' style="display:none">
-    <h3>新增學生資料</h3>
-    <form action="api/insert.php" method='post' id="create">
-      <ul>
-        <li>姓名：<input type="text" name="name" id="name"></li>
-        <li>學號：<input type="text" name="uni_id" id="uni_id"></li>
-        <li>班級座號：<input type="text" name="class_num" id="class_num"></li>
-        <li>出生年月日：<input type="text" name="birthday" id="birthday"></li>
-        <li>身份證字號：<input type="text" name="nat_id" id="nat_id"></li>
-        <li>住址：<input type="text" name="addr" id="addr"></li>
-        <li>父母：<input type="text" name="parent" id="parent"></li>
-        <li>電話：<input type="text" name="tel" id="tel"></li>
-        <li>科別：<input type="text" name="dept" id="dept"></li>
-        <li>畢業國中：<input type="text" name="grad_at" id="grad_at"></li>
-      </ul>
-      <div><input type="button" value="確定新增" onclick="create()"></div>
-    </form>
 
-
-  </div>
   
   <!---編輯資料用的表單-->
 
@@ -103,7 +87,13 @@ function create(){
 
 //顯示新增資料的表單
 function openInsert(){
-  document.querySelector("#insertBlock").style.display='block';
+  //document.querySelector("#insertBlock").style.display='block';
+  $.get("api/add_form.php",function(form){
+    document.querySelector(".add-form").innerHTML=form;
+    document.querySelector(".edit-form").innerHTML="";
+    
+
+  })
 }
 
 //查詢資料的函式
@@ -137,10 +127,15 @@ function query(){
 function getUpdateForm(id){
   $.get("api/edit.php",{id},function(form){
     document.querySelector(".edit-form").innerHTML=form;
+    document.querySelector(".add-form").innerHTML="";
   })  
 }
 
 function update(){
+  //??????
+  $.post("api/update.php",{},function(res){
+
+  })
 
 }
 

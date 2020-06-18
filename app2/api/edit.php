@@ -24,7 +24,7 @@ $row=$db->find($id);
         <li>科別：<input type="text" name="dept" id="dept" value="<?=$row['dept'];?>"></li>
         <li>畢業國中：<input type="text" name="grad_at" id="grad_at" value="<?=$row['grad_at'];?>"></li>
       </ul>
-      <div><input type="button" value="確定修改" onclick="editStudent()"></div>
+      <div><input type="button" value="確定修改" onclick="update()"></div>
     </form>
 
 
