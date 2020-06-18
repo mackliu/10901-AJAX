@@ -22,6 +22,9 @@
 班級:<select name="classes" id="classes" onchange="getStudents(this.value)">
 
   </select> <input type="text" name='q' id="query"><input type="button" value="查詢" onclick="query()">
+  
+  <!--用來存放編輯表單的區塊-->
+  <div class="edit-form"></div>
 
   <!--用來存放查詢結果的區塊-->
   <div class="query-result"></div>
@@ -54,6 +57,9 @@
 
 
   </div>
+  
+  <!---編輯資料用的表單-->
+
   
 </body>
 </html>
@@ -128,6 +134,12 @@ function query(){
 }
 
 //編輯資料的函式
+function getUpdateForm(id){
+  $.get("api/edit.php",{id},function(form){
+    document.querySelector(".edit-form").innerHTML=form;
+  })  
+}
+
 function update(){
 
 }
