@@ -13,7 +13,10 @@
         <li>科別：<input type="text" name="dept" id="dept"></li>
         <li>畢業國中：<input type="text" name="grad_at" id="grad_at"></li>
       </ul>
-      <div><input type="button" value="確定新增" onclick="create()"></div>
+        <div>
+            <input type="button" value="確定新增" onclick="create()">
+            <input type="button" value="取消操作" onclick="cancel()">
+        </div>
     </form>
 
 

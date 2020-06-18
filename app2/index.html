@@ -132,9 +132,29 @@ function getUpdateForm(id){
 }
 
 function update(){
-  //??????
-  $.post("api/update.php",{},function(res){
-
+  //取得所有要新增到資料庫的欄位
+  let form_data={};
+   form_data['name']=document.querySelector("#name").value
+   form_data['uni_id']=document.querySelector("#uni_id").value
+   form_data['class_num']=document.querySelector("#class_num").value
+   form_data['birthday']=document.querySelector("#birthday").value
+   form_data['nat_id']=document.querySelector("#nat_id").value
+   form_data['addr']=document.querySelector("#addr").value
+   form_data['parent']=document.querySelector("#parent").value
+   form_data['tel']=document.querySelector("#tel").value
+   form_data['dept']=document.querySelector("#dept").value
+   form_data['grad_at']=document.querySelector("#grad_at").value
+   form_data['id']=document.querySelector("#id").value
+    console.log(form_data);
+  $.post("api/update.php",form_data,function(res){
+    if(res=='1'){
+      alert("更新成功");
+      let nowClass=document.querySelector("#classes").value
+      getStudents(nowClass)
+      document.querySelector(".edit-form").innerHTML="";
+    }else{
+      alert("更新失敗");
+    }
   })
 
 }
@@ -152,4 +172,10 @@ function del(id){
   })
 }
 
+
+//取消功能
+function cancel(){
+    document.querySelector(".edit-form").innerHTML="";
+    document.querySelector(".add-form").innerHTML="";
+}
 </script>
