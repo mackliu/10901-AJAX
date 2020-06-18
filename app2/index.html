@@ -191,7 +191,15 @@ $("#query").on("input",()=>{ai()})
 function ai(){
   let str=document.querySelector("#query").value;
   $.get("api/query.php",{str},function(res){
-      document.querySelector(".query-result").innerHTML=res
+      console.log(res)
+      let data=JSON.parse(res)
+      console.log(data);
+      //document.querySelector(".query-result").innerHTML=res
+      let dom="";
+      data.forEach(function(value,index){
+        dom=dom+"<span style='font-size:20px'>"+value.name+"-"+value.class_num+"</span><br>";
+      })
+      document.querySelector(".query-result").innerHTML=dom;
   })
 }
 </script>

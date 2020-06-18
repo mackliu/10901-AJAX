@@ -10,8 +10,7 @@ $db=new DB("students");
 $query=$db->all([]," where name like '%$str%'");
 
 //利用迴圈來列出查詢到的資料並加上需要的html標籤或其它內容
-foreach($query as $q){
-    echo "<div>結果一:".$q['name']."-".$q['class_num']."-".$q['dept']."</div>";
-}
+
+echo json_encode($query);
 
 ?>
